@@ -28,14 +28,30 @@ async function run() {
 
   // created profile
 
-  const createdProfile = await prisma.profile.create({
-    data: {
-      bio: "I like turtles",
-      userId: 1,
-    },
+  // const createdProfile = await prisma.profile.create({
+  //   data: {
+  //     bio: "I like turtles",
+  //     userId: 1,
+  //   },
+  // });
+
+  // console.log(createdProfile);
+
+  // retrive all users
+
+  const users = await prisma.user.findMany({
+    // include: {
+    //   posts: true,
+    //   profile: true,
+    // },
+    select:{
+      posts: true,
+      profile: true
+    }
   });
 
-  console.log(createdProfile);
+  console.dir(users, { depth: Infinity });
+  // console.log(users);
 }
 
 run();
